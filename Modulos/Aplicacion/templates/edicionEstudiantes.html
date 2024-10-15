@@ -1,0 +1,45 @@
+{% extends "./index.html" %}
+
+{% block title %} Edición de Estudiantes {% endblock %}
+
+{% block body %}
+
+<div class="edicion">
+    <h2>Edición de Estudiante</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="/editarEstudiante/" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="txtCedula" name="txtCedula" value="{{Estudiante.cedula}}"
+                        class="form-control" placeholder="Cédula" minlength="8" maxlength="8" required readonly>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtNombre" name="txtNombre" value="{{Estudiante.nombre}}"
+                        class="form-control" placeholder="Nombre" maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtApellido" name="txtApellido" value="{{Estudiante.apellido}}"
+                        class="form-control" placeholder="Apellido" maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtAño" name="txtAño" value="{{Estudiante.año}}"
+                        class="form-control" placeholder="Año" maxlength="2" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtSeccion" name="txtSeccion" value="{{Estudiante.seccion}}"
+                        class="form-control" placeholder="Sección" maxlength="20" required>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">
+                        Guardar
+                        <span class="overlay"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

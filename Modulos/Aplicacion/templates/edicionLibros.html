@@ -1,0 +1,58 @@
+{% extends "./index.html" %}
+
+{% block title %} Edición de Libro {% endblock %}
+
+{% block body %}
+
+<div class="edicion">
+    <h2>Edición de Libro</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="/editarLibro/" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="txtCodigolibro" name="txtCodigolibro"  value="{{Libro.codigolibro}}" class="form-control" placeholder="Código..."
+                        maxlength="25" required readonly>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtTitulo" name="txtTitulo"  value="{{Libro.titulo}}" class="form-control" placeholder="Título..."
+                        maxlength="35" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtAutor" name="txtAutor" value="{{Libro.autor}}" class="form-control" placeholder="Autor..."
+                        maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <select type="text" id="txtMateria" name="txtMateria" class="form-control form-select"
+                        placeholder="Materia..." required>
+                        <option value="{{Libro.materia}}" selected class="text-muted">Materias...</option>
+                        <option value="000-Obras Generales">000-Obras Generales</option>
+                        <option value="100-Filosofía">100-Filosofía</option>
+                        <option value="200-Religión">200-Religión</option>
+                        <option value="400-Linguistica">400-Linguistica</option>
+                        <option value="500-Ciencias Puras">500-Ciencias Puras</option>
+                        <option value="600-Ciencias Aplicadas">600-Ciencias Aplicadas</option>
+                        <option value="700-Arte y Recreación">700-Arte y Recreación</option>
+                        <option value="800-Literatura">800-Literatura</option>
+                        <option value="900-Geografía e Historia">900-Geografía e Historia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtAño" name="txtAño" value="{{Libro.año}}" class="form-control" placeholder="Año..."
+                        maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="txtCantidad" name="txtCantidad" value="{{Libro.cantidad}}" class="form-control" placeholder="Cantidad..."
+                        maxlength="6" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">
+                        Guardar
+                        <span class="overlay"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "./index.html" %}
+
+{% block title %} Gestión de Libros {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex  justify-content-center align-items-center flex-column">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-danger fade show alerta" role="alert">
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2 class="d-flex  justify-content-center">Registro de Libro</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="../registrarLibro/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtCodigolibro" name="txtCodigolibro" class="form-control" placeholder="Código..."
+                            maxlength="25" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtTitulo" name="txtTitulo" class="form-control" placeholder="Título..."
+                            maxlength="35" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtAutor" name="txtAutor" class="form-control" placeholder="Autor..."
+                            maxlength="20" required>
+                    </div>
+                    <div class="form-group">
+                        <select type="text" id="txtMateria" name="txtMateria" class="form-control form-select"
+                            placeholder="Materia..." required>
+                            <option value="" disabled selected class="text-muted">Materias...</option>
+                            <option value="000-Obras Generales">000-Obras Generales</option>
+                            <option value="100-Filosofía">100-Filosofía</option>
+                            <option value="200-Religión">200-Religión</option>
+                            <option value="400-Linguistica">400-Linguistica</option>
+                            <option value="500-Ciencias Puras">500-Ciencias Puras</option>
+                            <option value="600-Ciencias Aplicadas">600-Ciencias Aplicadas</option>
+                            <option value="700-Arte y Recreación">700-Arte y Recreación</option>
+                            <option value="800-Literatura">800-Literatura</option>
+                            <option value="900-Geografía e Historia">900-Geografía e Historia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtAño" name="txtAño" class="form-control" placeholder="Año..."
+                            maxlength="4" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="txtCantidad" name="txtCantidad" class="form-control" placeholder="Cantidad..."
+                            maxlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">
+                            Guardar
+                            <span class="overlay"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h2 class="d-flex  justify-content-center">Listado de Libros</h2>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Código</th>
+                        <th class="text-center">Título</th>
+                        <th class="text-center">Autor</th>
+                        <th class="text-center">Materia</th>
+                        <th class="text-center">Año</th>
+                        <th class="text-center">Cantidad</th>
+                        <th class="text-center">Prestados</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in libros %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{c.codigolibro}}</td>
+                        <td>{{c.titulo}}</td>
+                        <td>{{c.autor}}</td>
+                        <td>{{c.materia}}</td>
+                        <td>{{c.año}}</td>
+                        <td>{{c.cantidad}}</td>
+                        <td>{{c.cantidadPres}}</td>
+                        <td>
+                            <a href="../edicionLibro/{{c.codigolibro}}" class="btn btn-info">
+                                <img src="../static/images/editar.svg" alt="editar" width="20px">
+                            </a>
+                            <a href="../eliminarLibro/{{c.codigolibro}}" class="btn btn-danger btnEliminacion">
+                                <img src="../static/images/eliminar.svg" alt="eliminar" width="20px">
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
